@@ -2,7 +2,8 @@
 import csv
 
 
-def is_number(s):       # check if command is only integer
+def is_number(s):
+    """check if command is only integer"""
     try:
         int(s)
         return True
@@ -11,6 +12,7 @@ def is_number(s):       # check if command is only integer
 
 
 def search(a):
+    """Function to search definition + source by key (appelation)"""
     explanation = []
     appellation = []
     source = []
@@ -36,21 +38,23 @@ def search(a):
         a in appellation
         return my_dictionary[a]
     except KeyError:
-        test = 1        # valou to run while loop
+        test = 1        # value to run while loop
         return "Wrong appeltation. Input new one: "
 
 
 def sort():
+    """Sort all key alphabeticaly"""
     appellation = []
     with open("dictionary.csv", "r") as f:
         d = csv.DictReader(f)
         for row in d:
             appellation.append(row["appellation"])      # all keys to list
     z = sorted(appellation, key=str.lower)     # here is sorted, key to sort independly
-    return z        # from lower/upper case
+    return z                                   # from lower/upper case
 
 
 def same_key(a):        # check if inserted key in command 2 is alredy in keychain
+    """Check if our input for key isn't already in csv file"""
     appellation = []
     with open("dictionary.csv", "r") as f:
         d = csv.DictReader(f)
@@ -61,6 +65,7 @@ def same_key(a):        # check if inserted key in command 2 is alredy in keycha
 
 
 def write(a, b, c):     # write new key definition and source to file
+    """Write new row in csv file"""
     with open("dictionary.csv", "a") as csvfile:        # open file to add to last position
         fieldnames = ["appellation", "explanation", "source"]
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -70,6 +75,7 @@ def write(a, b, c):     # write new key definition and source to file
 
 
 def show(a):
+    """Print all keys and dictionary entrys on given letter"""
     explanation = []
     appellation = []
     source = []
@@ -87,7 +93,7 @@ def show(a):
 
     my_dictionary = {}
     for i in range(len(appellation)):       # make dictionary, set items from lis appellation
-        appellation[i] = appellation[i].lower()     # as key and tuple as definition
+        appellation[i] = appellation[i].lower()     # key and tuple as definition
         my_dictionary[appellation[i]] = z[i]
 
     new = []
@@ -95,7 +101,7 @@ def show(a):
 
     for x in range(0, len(appellation)):
         if a in appellation[x][0]:  # check is letter in any appeltion
-            new.append(appellation[x])  # add al matched appeltions to new list
+            new.append(appellation[x])  # add all matched appeltions to new list
 
     for z in range(0, len(new)):
         v = [new[z], my_dictionary[new[z]]]     # with all apellations in new list us them
@@ -119,7 +125,7 @@ while True:     # if 0 not given will remain
     0) exit""")
 
     command = input("Enter number of command: ")       # input command to menu
-    if is_number(command):          # is command corresct
+    if is_number(command):          # is command correct
         command = int(command)
         if command > - 1 and command < 5:
 
